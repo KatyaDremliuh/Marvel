@@ -1,7 +1,7 @@
 <template>
     <div class="text-center">
-        <div class="spinner-border text-danger" role="status">
-            <span class="sr-only"></span>
+        <div class="spinner-grow text-danger" role="status">
+            <span class="visually-hidden">Loading..</span>
         </div>
     </div>
 </template>

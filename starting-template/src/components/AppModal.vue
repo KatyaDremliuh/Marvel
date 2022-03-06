@@ -9,7 +9,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{character.name}}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">{{character.nameor}}</h5>
           <button
             type="button"
             class="btn-close"
@@ -21,7 +21,7 @@
         <div class="modal-body">
           <img :src="character.thumbnail"
             class="img-fluid rounded-start"
-            alt="..."/>
+            :alt="character.nameor"/>
 
           <!--описание персонажа-->
           <div>
