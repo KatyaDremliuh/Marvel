@@ -5,12 +5,10 @@
     <div class="container">
       <h1 class="pt-3 pb-3">Персонажи Marvel</h1>
 
-      <pre>characterIndex: {{characterIndex}}</pre>
-
       <!--инфо о персонаже в модальном окне-->
       <app-modal :character="characters[characterIndex]"/>
 
-      <spinner />
+      <spinner v-if="loading"/>
 
       <div class="row">
 
@@ -21,12 +19,10 @@
           <div class="row g-0">
             <div class="col-md-4">
                <!--изображение-->
-              <img
-                :src="el.thumbnail"  
-                class="img-fluid rounded-start"
-                alt="..."
-              />
+              <img :src="el.thumbnail"  
+                class="img-fluid rounded-start" alt="..."/>
             </div>
+
             <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title">{{el.name}}</h5> <!--имя персонажа-->
@@ -37,10 +33,8 @@
                   class="btn btn-secondary"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
-                  @click="characterIndex = idx"
-                >
-                  Подробнее
-                </button>
+                  @click="characterIndex = idx">Подробнее</button>
+
               </div>
             </div>
           </div>
@@ -78,8 +72,10 @@ export default {
         },
   },
   computed: {},
-  mounted(){
-      this.fetchCharacters()
+  async mounted(){
+      this.loading = true
+      await this.fetchCharacters()
+      this.loading = false
   },
 };
 </script>
