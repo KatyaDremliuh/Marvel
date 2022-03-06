@@ -5,23 +5,30 @@
     <div class="container">
       <h1 class="pt-3 pb-3">Персонажи Marvel</h1>
 
+<pre>characterIndex: {{characterIndex}}</pre>
+
       <app-modal />
 
       <spinner />
 
       <div class="row">
-        <div class="card mb-3" style="max-width: 540px;">
+
+        <div v-for="(el, idx) in characters"
+              class="card mb-3" 
+              :key="el.id"
+              style="max-width: 540px;">
           <div class="row g-0">
             <div class="col-md-4">
+               <!--изображение-->
               <img
-                src="https://i.annihil.us/u/prod/marvel/i/mg/9/30/538cd33e15ab7/standard_xlarge.jpg"
+                :src="el.thumbnail"  
                 class="img-fluid rounded-start"
                 alt="..."
               />
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">Человек-паук</h5>
+                <h5 class="card-title">{{el.name}}</h5> <!--имя персонажа-->
 
                 <!-- Button trigger modal -->
                 <button
@@ -29,6 +36,7 @@
                   class="btn btn-secondary"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
+                  @click="characterIndex = idx"
                 >
                   Подробнее
                 </button>
@@ -36,6 +44,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -60,8 +69,17 @@ export default {
       characterIndex: 0,
     };
   },
-  methods: {},
+  methods: {
+        fetchCharacters: function(){
+            return fetch('https://netology-api-marvel.herokuapp.com/characters')
+            .then(res => res.json())
+            .then(json => this.characters = json)
+        },
+  },
   computed: {},
+  mounted(){
+      this.fetchCharacters()
+  },
 };
 </script>
 
